@@ -12,7 +12,6 @@ abstract class GetTrivia{
   //multi event in here
   late int GetTriviaDataEvent;
   /* can add more */
-
   //usecase have the same size with event
   late GetListTriviaUseCase getListTriviaUseCase;
   //stateparam
