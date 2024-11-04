@@ -40,16 +40,14 @@ dependencies:
   equatable:
   #either_dart:
   either_dart: ^1.0.0
-
-  bloc_annotations:
-    path: ../bloc_annotations/
+  fast_bloc_annotations: ^0.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   build_runner:
-  generators:
+  fast_bloc_generators:
     path: ../generators/
   # rules and activating additional ones.
 

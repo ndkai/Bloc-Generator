@@ -1,4 +1,5 @@
 import 'package:example/trivia/domain/entities/trivia.dart';
+import 'package:example/trivia/domain/use_cases/delete_trivia.dart';
 import 'package:example/trivia/presentation/manager/get_trivia_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class TriviaScreen extends StatelessWidget {
     return Scaffold(
       body: BlocProvider<GetTriviaBloc>(
         create: (_) =>
-            GetTriviaBloc(GetListTriviaUseCase())..add(GetTriviaDataEvent(10)),
+            GetTriviaBloc(GetListTriviaUseCase(), DeleteTriviaUseCase())..add(GetTriviaDataEvent(10)),
         child: BlocBuilder<GetTriviaBloc, GetTriviaState>(
             builder: (context, state) {
           if (state is GetTriviaLoading) {

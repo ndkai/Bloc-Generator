@@ -4,4 +4,5 @@ import 'package:example/trivia/domain/entities/trivia.dart';
 
 abstract class TriviaRepo{
   Future<Either<Failure, List<Trivia>>> getListTrivia(int param);
+  Future<Either<Failure, bool>> deleteTrivia(int param);
 }

@@ -19,5 +19,10 @@ class TriviaRepoImpl implements TriviaRepo{
       return const Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> deleteTrivia(int param) async{
+    return Right(true);
+  }
   
 }

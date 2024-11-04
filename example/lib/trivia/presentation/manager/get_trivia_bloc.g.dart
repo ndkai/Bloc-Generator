@@ -9,15 +9,26 @@ part of 'get_trivia_bloc.dart';
 // Bloc generation
 class GetTriviaBloc extends Bloc<GetTriviaEvent, GetTriviaState> {
   final GetListTriviaUseCase getListTriviaUseCase;
+  final DeleteTriviaUseCase deleteTriviaUseCase;
   GetTriviaBloc(
     this.getListTriviaUseCase,
+    this.deleteTriviaUseCase,
   ) : super(GetTriviaInitial()) {
     on<GetTriviaDataEvent>(_doGetTriviaDataEvent);
+    on<DeleteTriviaDataEvent>(_doDeleteTriviaDataEvent);
   }
   void _doGetTriviaDataEvent(
       GetTriviaDataEvent event, Emitter<GetTriviaState> emit) async {
     emit(GetTriviaLoading());
     var result = await getListTriviaUseCase(event.param);
+    return emit(
+        result.fold((l) => GetTriviaError(l), (r) => GetTriviaSuccess(r)));
+  }
+
+  void _doDeleteTriviaDataEvent(
+      DeleteTriviaDataEvent event, Emitter<GetTriviaState> emit) async {
+    emit(GetTriviaLoading());
+    var result = await deleteTriviaUseCase(event.param);
     return emit(
         result.fold((l) => GetTriviaError(l), (r) => GetTriviaSuccess(r)));
   }
@@ -30,6 +41,11 @@ sealed class GetTriviaEvent {}
 class GetTriviaDataEvent extends GetTriviaEvent {
   final int param;
   GetTriviaDataEvent(this.param);
+}
+
+class DeleteTriviaDataEvent extends GetTriviaEvent {
+  final int param;
+  DeleteTriviaDataEvent(this.param);
 }
 
 // State generation
