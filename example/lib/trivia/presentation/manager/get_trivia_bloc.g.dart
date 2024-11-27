@@ -7,6 +7,7 @@ part of 'get_trivia_bloc.dart';
 // **************************************************************************
 
 // Bloc generation
+@injectable
 class GetTriviaBloc extends Bloc<GetTriviaEvent, GetTriviaState> {
   final GetListTriviaUseCase getListTriviaUseCase;
   final DeleteTriviaUseCase deleteTriviaUseCase;
@@ -17,6 +18,7 @@ class GetTriviaBloc extends Bloc<GetTriviaEvent, GetTriviaState> {
     on<GetTriviaDataEvent>(_doGetTriviaDataEvent);
     on<DeleteTriviaDataEvent>(_doDeleteTriviaDataEvent);
   }
+  @factoryMethod
   void _doGetTriviaDataEvent(
       GetTriviaDataEvent event, Emitter<GetTriviaState> emit) async {
     emit(GetTriviaLoading());
@@ -25,6 +27,7 @@ class GetTriviaBloc extends Bloc<GetTriviaEvent, GetTriviaState> {
         result.fold((l) => GetTriviaError(l), (r) => GetTriviaSuccess(r)));
   }
 
+  @factoryMethod
   void _doDeleteTriviaDataEvent(
       DeleteTriviaDataEvent event, Emitter<GetTriviaState> emit) async {
     emit(GetTriviaLoading());

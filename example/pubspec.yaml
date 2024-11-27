@@ -40,6 +40,9 @@ dependencies:
   equatable:
   #either_dart:
   either_dart: ^1.0.0
+  get_it: ^8.0.1
+  injectable: ^2.5.0
+
   fast_bloc_annotations: ^0.0.1
 
 dev_dependencies:
@@ -47,6 +50,7 @@ dev_dependencies:
     sdk: flutter
 
   build_runner:
+  injectable_generator: ^2.6.2
   fast_bloc_generators:
     path: ../generators/
   # rules and activating additional ones.

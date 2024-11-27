@@ -1,3 +1,4 @@
+import 'package:example/core/di/injection.dart';
 import 'package:example/trivia/domain/entities/trivia.dart';
 import 'package:example/trivia/domain/use_cases/delete_trivia.dart';
 import 'package:example/trivia/presentation/manager/get_trivia_bloc.dart';
@@ -14,8 +15,7 @@ class TriviaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider<GetTriviaBloc>(
-        create: (_) =>
-            GetTriviaBloc(GetListTriviaUseCase(), DeleteTriviaUseCase())..add(GetTriviaDataEvent(10)),
+        create: (_) => getIt<GetTriviaBloc>()..add(GetTriviaDataEvent(10)),
         child: BlocBuilder<GetTriviaBloc, GetTriviaState>(
             builder: (context, state) {
           if (state is GetTriviaLoading) {
@@ -29,22 +29,22 @@ class TriviaScreen extends StatelessWidget {
           if (state is GetTriviaSuccess) {
             return SafeArea(
                 child: ListView(
-              children: state.data.map(
-                  (e) => BuildTrivia(trivia: e,)
-              ).toList()
-            ));
+                    children: state.data
+                        .map((e) => BuildTrivia(
+                              trivia: e,
+                            ))
+                        .toList()));
           }
           return SizedBox();
         }),
       ),
     );
   }
-
-
 }
 
 class BuildTrivia extends StatefulWidget {
   final Trivia trivia;
+
   const BuildTrivia({super.key, required this.trivia});
 
   @override
@@ -54,6 +54,7 @@ class BuildTrivia extends StatefulWidget {
 class _BuildTriviaState extends State<BuildTrivia> {
   TextEditingController _controller = TextEditingController();
   Color boxColors = Colors.white;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,18 +62,21 @@ class _BuildTriviaState extends State<BuildTrivia> {
       padding: EdgeInsets.all(8),
       margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: boxColors,
-        borderRadius: BorderRadius.circular(8)
-      ),
+          color: boxColors, borderRadius: BorderRadius.circular(8)),
       child: Column(
         children: [
-          Text(widget.trivia.question??""),
-          TextField(controller: _controller,),
-          SizedBox(height: 10,),
+          Text(widget.trivia.question ?? ""),
+          TextField(
+            controller: _controller,
+          ),
+          SizedBox(
+            height: 10,
+          ),
           InkWell(
-            onTap: (){
+            onTap: () {
               setState(() {
-                if(_controller.text.toLowerCase() == widget.trivia.correctAnswer){
+                if (_controller.text.toLowerCase() ==
+                    widget.trivia.correctAnswer) {
                   boxColors = Colors.greenAccent;
                 }
                 boxColors = Colors.redAccent;
@@ -82,9 +86,10 @@ class _BuildTriviaState extends State<BuildTrivia> {
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: Colors.blueAccent
+                  color: Colors.blueAccent),
+              child: Center(
+                child: Text("Submit"),
               ),
-              child: Center(child: Text("Submit"),),
             ),
           )
         ],
@@ -99,4 +104,3 @@ class _BuildTriviaState extends State<BuildTrivia> {
     _controller.dispose();
   }
 }
-

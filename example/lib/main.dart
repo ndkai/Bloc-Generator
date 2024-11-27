@@ -1,7 +1,12 @@
 import 'package:example/trivia/presentation/pages/trivia_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'core/di/injection.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
+
   runApp(const MyApp());
 }
 
