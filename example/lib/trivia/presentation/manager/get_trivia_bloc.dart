@@ -9,7 +9,7 @@ import '../../domain/use_cases/get_list_trivia.dart';
 part 'get_trivia_bloc.g.dart';
 
 
-@fastBloc
+@FastBloc(useInjectable: true)
 abstract class GetTrivia{
   late Failure errorState;
   late List<Trivia> successState;

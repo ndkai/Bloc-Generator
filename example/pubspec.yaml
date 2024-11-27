@@ -42,8 +42,7 @@ dependencies:
   either_dart: ^1.0.0
   get_it: ^8.0.1
   injectable: ^2.5.0
-
-  fast_bloc_annotations: ^0.0.1
+  fast_bloc_annotations: ^0.0.3
 
 dev_dependencies:
   flutter_test:

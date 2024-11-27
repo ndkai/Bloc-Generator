@@ -234,10 +234,10 @@ packages:
     dependency: "direct main"
     description:
       name: fast_bloc_annotations
-      sha256: c8b0c64fab206e32e4d9b0e3647fb7040eb9f3000dc289e8962cdaebb04eaaef
+      sha256: "297c5c8c81b61832cf05f5e432ee59d69a2b561d3c9d31102ca087d77f31d8e5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.3"
   fast_bloc_generators:
     dependency: "direct dev"
     description:
